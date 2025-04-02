@@ -40,12 +40,12 @@
         h1 {
             font-size: 3rem;
             font-weight: bold;
-            transition: all 1s ease-in-out;
+            transition: opacity 1s ease-in-out; /* Slower opacity change */
         }
         p {
             font-size: 1.5rem;
             max-width: 700px;
-            transition: all 1s ease-in-out;
+            transition: opacity 1s ease-in-out; /* Slower opacity change */
         }
         .cluttered {
             font-family: 'Papyrus', cursive;
@@ -67,14 +67,22 @@
     
     <script>
         window.addEventListener('scroll', () => {
-            // Apply the blur effect to the background as the user scrolls
             const scrollValue = window.scrollY;
+
+            // Apply the blur effect to the background as the user scrolls
             const blurValue = Math.min(scrollValue / 20, 10); // Limit the blur value to 10px
             document.querySelector('.background').style.filter = `blur(${blurValue}px)`;
 
-            // Remove the "cluttered" class from the text as user scrolls
-            document.querySelector('h1').classList.remove('cluttered');
-            document.querySelector('p').classList.remove('cluttered');
+            // Text opacity changes more slowly as the user scrolls
+            const textOpacity = Math.min(scrollValue / 400, 1); // Slow down opacity change
+            document.querySelector('h1').style.opacity = textOpacity;
+            document.querySelector('p').style.opacity = textOpacity;
+
+            // Reverse the text opacity change when scrolling up
+            if (scrollValue === 0) {
+                document.querySelector('h1').style.opacity = 1;
+                document.querySelector('p').style.opacity = 1;
+            }
         });
     </script>
 </body>
