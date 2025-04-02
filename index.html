@@ -12,6 +12,11 @@
             overflow-x: hidden;
             transition: all 1s ease-in-out;
             background-color: #f5f5f5;
+            background-image: url('https://m.media-amazon.com/images/I/712AfDqOVRL.jpg'); /* Replace with your wine glass image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
         }
         .container {
             width: 100%;
@@ -27,11 +32,13 @@
             font-size: 3rem;
             font-weight: bold;
             transition: all 1s ease-in-out;
+            color: #fff;
         }
         p {
             font-size: 1.5rem;
             max-width: 700px;
             transition: all 1s ease-in-out;
+            color: #fff;
         }
         .cluttered {
             font-family: 'Papyrus', cursive;
@@ -49,11 +56,19 @@
         <h1 class="cluttered">The Crystal Goblet</h1>
         <p class="cluttered">Typography should be invisible, allowing the content to shine without distraction.</p>
     </div>
-    
+
     <script>
         window.addEventListener('scroll', () => {
-            document.querySelector('h1').classList.remove('cluttered');
-            document.querySelector('p').classList.remove('cluttered');
+            const scrollValue = window.scrollY;
+
+            // Text clarity changes as the user scrolls
+            const textOpacity = Math.min(scrollValue / 200, 1);
+            document.querySelector('h1').style.opacity = textOpacity;
+            document.querySelector('p').style.opacity = textOpacity;
+
+            // Background blur effect as the user scrolls
+            const blurValue = Math.max(10 - scrollValue / 100, 0);
+            document.body.style.filter = `blur(${blurValue}px)`;
         });
     </script>
 </body>
